@@ -4,26 +4,26 @@ not the answer) */
 
 #include <iostream>
 #include <math.h>
-
-bool CheckPrime(long num) {
-	int halfway = ceil(num / 2);
-	for (long i = 2; i < halfway; i++) {
-		if (num % i == 0)
-			return false;
-	}
-	return true;
-}
+#include "../Resources/primes.h"
 
 int main() {
 	long uglyNum = 600851475143;
 	long halfway = ceil(uglyNum / 2);
 	long largest = 0;
+	std::cout << halfway << std::endl;
+	std::vector<long> primes = GeneratePrimes(halfway);
 	std::cout << "Finding largest prime factor of " << uglyNum << "...." << std::endl;
-	for (long i = 1; i < halfway; i += long(2)) {
+	for (long i = 2; i < halfway; i++) {
 		if (uglyNum % i == 0) {
 			std::cout << "Checking: " << i;
-			if (CheckPrime(i)) {
-				largest = i;
+			for (int j = 0; j < primes.size(); j++) {
+				if (primes[j] == i) {
+					largest = i;
+					break;
+				}
+				else if (primes[j] > i)
+					break;
+
 			}
 			std::cout << " done		Largest: " << largest << std::endl;
 		}
