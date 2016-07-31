@@ -1,10 +1,11 @@
 #include "primes.h"
 #include <iostream>
+#include <math.h>
 
 std::vector<int> GeneratePrimes(int num) {
 	bool prime;
 	std::vector<int> primes;
-	std::cout << "ints";
+	std::cout << "generating prime numbers..." << std::endl;
 	for (int i = 2; i <= num; i++) {
 		prime = true;
 		for (int j = 2; j < i; j++) {
@@ -22,7 +23,7 @@ std::vector<int> GeneratePrimes(int num) {
 std::vector<long> GeneratePrimes(long num) {
 	bool prime;
 	std::vector<long> primes;
-	std::cout << "generating primes...";
+	std::cout << "generating prime numbers..." << std::endl;
 	for (long i = 2; i <= num; i++) {
 		prime = true;
 		for (long j = 2; j < i; i++) {
@@ -33,13 +34,25 @@ std::vector<long> GeneratePrimes(long num) {
 		}
 		if (prime)
 			primes.push_back(i);
-		if (i == num / 4)
-			std::cout << " quarter";
-		else if (i == num / 2)
-			std::cout << " half";
-		else if (i == num * 3 / 4)
-			std::cout << " three quarters";
 	}
 	std::cout << " done" << std::endl;
 	return primes;
+}
+
+bool CheckIfPrime(int num) {
+	int halfway = ceil(num / 2);
+	for (int i = 3; i < halfway; i += 2) {
+		if (num % i == 0)
+			return false;
+	}
+	return true;
+}
+
+bool CheckIfPrime(long num) {
+		int halfway = ceil(num / 2);
+	for (long i = 3; i < halfway; i += 2) {
+		if (num % i == 0)
+			return false;
+	}
+	return true;
 }
